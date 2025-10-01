@@ -4,15 +4,7 @@ Bu proje, Java dilinde **OOP (Nesne Yönelimli Programlama)** ve **metot aşır�
 
 
 
-##  Proje Yapısı
 
-src/
-└── org/
-    └── example/
-        ├── Main.java   
-        ├── Player.java 
-        ├── Weapon.java 
-        └── Point.java  
 
         
 
