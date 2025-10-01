@@ -1,68 +1,68 @@
-#  Java Encapsulation
+# Java Temelleri ve OOP Alıştırmaları
 
-### Proje Kurulumu
+Bu proje, Java dilinde **OOP (Nesne Yönelimli Programlama)** ve **metot aşırı yükleme (overloading)** konseptlerini uygulamalı olarak göstermektedir. Proje iki ana bölümden oluşur: bir **Oyun Karakteri Yönetim Sistemi** (`Player` ve `Weapon`) ve bir **Geometrik Nokta Hesaplama Sistemi** (`Point`).
 
-Projeyi öncelikle forklayın ve clone edin.
-Daha sonra projeyi IntellijIDEA kullanarak açınız. README.md dosyasını dikkatli bir şekilde okuyarak istenenleri yapmaya çalışın.
-Proje sayımız ilerledikçe proje yönetimimizi kolaylaştırmak adına projelerimizi belli klasör kalıplarında saklamak işimizi kolaylaştırmak adına iyi bir alışkanlıktır.
-Örnek bir Lokasyon: Workintech/Sprint_1/Etud.
+---
 
-### Hedeflerimiz:
+##  Proje Yapısı
 
-### Point Sınıfı
+src/
+└── org/
+    └── example/
+        ├── Main.java   // Programın çalıştırıldığı ana sınıf ve test senaryoları.
+        ├── Player.java // Oyun karakterini temsil eden sınıf.
+        ├── Weapon.java // Karakterin kullanabileceği silahları tanımlayan Enum.
+        └── Point.java  // Geometrik bir noktayı temsil eden ve mesafe hesaplayan sınıf.
 
-* org.example paketi altında ```Point``` isimli bir sınıf tanımlayınız.
-* Sınıfın 2 tane değişkeni olmalı x ve y ikisinin de değeri ```int``` olmalı.
-* Bu iki değişkene sadece bu sınıf içerisinden erişilebilinmeli.
-* Point sınıfı için bir adet ```constructor``` tanımlayınız. İki değeri de set edebilmeli.
-* İlgili iki değişken için getter ve setter metodlarını tanımlayınız.
-* Point sınıfı içerisinde bir tane ```distance``` isminde metod tanımlayınız.
-* distance metodu iki nokta arasındaki uzaklığı bulmaya yarar.
-* Bu işlemin matematiksel olarak yapımı: √ (xB − xA) * (xB - xA) + (yB − yA) * (yB - yA) şeklindedir.
-*  √ işlemi karekök işlemini tanımlar. ```Math.sqrt``` bu işlem için kullanılmalıdır.
-* distance metodu için 3 farklı ```overloading``` istenmektedir
-* ```distance()``` hiçbir değer almazsa (0,0) noktasına göre uzaklık hesaplanmalı.
-*  ```distance(Point p)``` şeklinde başka bir Point objesi alırsa verilen noktaya göre uzaklık hesaplanmalı.
-* ```distance(int a, int b)``` şeklinde 2 farklı int parametresi alınırsa (a,b) ye göre uzaklık bulunmalı.
+        ---
 
-Aşağıdaki gibi bir test yapılabilir.
+##  Bölüm 1: Oyun Karakteri Sistemi (`Player` & `Weapon`)
 
-INPUT
-Point first = new Point(6, 5);
-
-Point second = new Point(3, 1);
-
-System.out.println("distance(0,0)= " + first.distance());
-
-System.out.println("distance(second)= " + first.distance(second));
-
-System.out.println("distance(2,2)= " + first.distance(2, 2));
-
-Point point = new Point(0,0);
-
-System.out.println("distance()= " + point.distance());
-
-OUTPUT
-distance(0,0)= 7.810249675906654
-
-distance(second)= 5.0
-
-distance(2,2)= 5.0
-
-distance()= 0.0
+Bu bölümde, bir oyun karakterinin temel özelliklerini ve davranışlarını yöneten sınıflar bulunmaktadır. **Kapsülleme (Encapsulation)** ve **veri doğrulama** prensipleri uygulanmıştır.
 
 ### Player Sınıfı
- 
-*  org.example paketi ```Player``` isimli bir sınıf oluşturunuz.
-* Sınıfın 3 tane değişkeni olmalı ```String name``` ```int healthPercentage``` ```Weapon weapon```
-* Weapon org.example paketi altında bir enum olmalı.
-* Weapon enumının değerlerinden bir tanesi ```SWORD``` olmalı. İsteğinize göre başka değerlerde ekleyebilirsiniz.
-* Her weapon için bir adet ```int damage``` ve ```double attackSpeed``` değeri tanımlanmalı. Aynı zamana bu değişkenler için getter metodları da yazılmalı.
-* Tüm değişkenlere sadece bu sınıf içerisinden ulaşılabilinmeli.
-* Değişkenler için getter ve setter metodları kesinlikle TANIMLANMAMALI.
-* Sınıfın tek bir ```constructor``` metodu olmalı ve bu 3 değeri set edebilmeli.
-* player objesi oluşturulduğu anda eğer healthPercentage 100'den büyük verildiyse, 100 değerine set edilmeli. Eğer healthPercentage 0'dan küçük verildiyse 0'a set edilmeli.
-* Player sınıfı için 3 adet metod tanımlamalıyız.
-* ```healthRemaining``` metodu healthPercentage değerini dönmeli.
-* ```loseHealth(int damage)``` metodu damage değeri kadar healthPercentage değerinden düşmeli. Oyuncunun canı bir şekilde 0'değerinin altına düşerse, ```System.out.println(name + " player has been knocked out of game");``` değerini ekrana basmalı. 
-*  ```restoreHealth(int healthPotion)``` metodu healthPotion miktarı kadar healthPercentage değerine ekleme yapmalı. Oyunucunun canı 100 değerinden yüksek bir değere çıkarsa tekrar geri 100 değerine eşitlenmeli.
+
+`Player` sınıfı, karakterin adını, can yüzdesini ve silahını yönetir.
+
+| Özellik / Metot | Açıklama | Uygulanan Kavram |
+| :--- | :--- | :--- |
+| `name`, `healthPercentage`, `weapon` | Sınıfın özel (private) üyeleri. | Kapsülleme |
+| `Player(...)` **Constructor** | Karakter oluşturulurken can yüzdesini **0-100 aralığında** sınırlar. | Veri Doğrulama |
+| `loseHealth(int damage)` | Karakterin canını azaltır. Can sıfıra düşerse karakterin oyundan çıktığını bildirir. | Metot Kullanımı |
+| `restoreHealth(int potion)` | Canı artırır ve canın **maksimum 100** olmasını sağlar. | Veri Doğrulama |
+| `healthRemaining()` | Güncel can yüzdesini döndürür. | Getter |
+
+### Weapon Enum
+
+`Weapon` (Enum) sınıfı, oyundaki farklı silah türlerini, bunların sabit hasar (`damage`) ve saldırı hızı (`attackSpeed`) değerleriyle birlikte tanımlar.
+
+| Silah | Hasar (`damage`) | Saldırı Hızı (`attackSpeed`) |
+| :--- | :--- | :--- |
+| `SWORD` | 50 | 1.2 |
+| `AXE` | 70 | 0.9 |
+| `BOW` | 40 | 1.5 |
+| `DAGGER` | 30 | 2.0 |
+
+---
+
+##  Bölüm 2: Geometrik Nokta Hesaplama Sistemi (`Point`)
+
+Bu bölüm, 2D bir noktayı temsil eden ve diğer noktalara veya orijine olan mesafeyi hesaplayabilen bir sınıfı içerir. (**Not:** `Point.java` sınıfının kodu verilmemiştir, ancak `Main.java`'daki kullanıma göre özellikleri çıkarılmıştır.)
+
+### Point Sınıfı (Beklenen Fonksiyonalite)
+
+| Metot Tanımı | Açıklama | Uygulanan Kavram |
+| :--- | :--- | :--- |
+| `distance()` | Noktanın **orijine** `(0, 0)` olan uzaklığını hesaplar. | Metot Kullanımı |
+| `distance(Point another)` | Noktanın parametre olarak verilen başka bir `Point` nesnesine olan uzaklığını hesaplar. | Metot Overloading |
+| `distance(int x, int y)` | Noktanın parametre olarak verilen koordinatlara olan uzaklığını hesaplar. | Metot Overloading |
+
+---
+
+##  Çalıştırma ve Test Senaryoları
+
+`Main.java` sınıfı, yukarıdaki sınıfların temel işlevlerini ve kurallarını test etmek için tasarlanmıştır.
+
+### Player Sınıfı Test Çıktısı (Özet)
+
+Bu testler, constructor'daki can doğrulamasını (`>100` kontrolü), can kaybını, karakterin oyundan düşmesini (`knocked out`) ve can yenileme sırasında maksimum can kontrolünü göstermektedir.
