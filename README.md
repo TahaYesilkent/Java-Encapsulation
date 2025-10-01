@@ -2,19 +2,19 @@
 
 Bu proje, Java dilinde **OOP (Nesne Yönelimli Programlama)** ve **metot aşırı yükleme (overloading)** konseptlerini uygulamalı olarak göstermektedir. Proje iki ana bölümden oluşur: bir **Oyun Karakteri Yönetim Sistemi** (`Player` ve `Weapon`) ve bir **Geometrik Nokta Hesaplama Sistemi** (`Point`).
 
----
+
 
 ##  Proje Yapısı
 
 src/
 └── org/
     └── example/
-        ├── Main.java   // Programın çalıştırıldığı ana sınıf ve test senaryoları.
-        ├── Player.java // Oyun karakterini temsil eden sınıf.
-        ├── Weapon.java // Karakterin kullanabileceği silahları tanımlayan Enum.
-        └── Point.java  // Geometrik bir noktayı temsil eden ve mesafe hesaplayan sınıf.
+        ├── Main.java   
+        ├── Player.java 
+        ├── Weapon.java 
+        └── Point.java  
 
-        ---
+        
 
 ##  Bölüm 1: Oyun Karakteri Sistemi (`Player` & `Weapon`)
 
